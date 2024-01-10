@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-return */
-/* eslint-disable no-shadow */
 const form = document.querySelector('.footer_form');
 const formPopup = document.querySelector('.form_popup');
 const output = document.querySelector('.chat_view_window');
@@ -11,31 +9,30 @@ form.addEventListener('submit', (e) => {
   navigator.geolocation.getCurrentPosition((data) => {
     const { latitude, longitude } = data.coords;
     if (data) {
-      arr.map((elem) => {
+      arr.forEach((elem) => {
         output.innerHTML += `
               <div class="test_box message my_message">
                 <span>${elem}</span>
                 <div class="location">[${latitude}, ${longitude}]</div>
               </div>
             `;
-        return;
       });
     }
   }, () => {
     popup.classList.remove('d-none');
-    arr.map((elem) => {
-      formPopup.addEventListener('submit', (e) => {
-        e.preventDefault();
+    arr.forEach((elem) => {
+      formPopup.addEventListener('submit', (evt) => {
+        evt.preventDefault();
         output.innerHTML += `
         <div class="message_wrap">
           <span>${elem}</span>
-          <div class="location">[${e.target.popup.value}]</div>
+          <div class="location">[${evt.target.popup.value}]</div>
         </div>
         `;
         popup.classList.add('d-none');
       });
-      popup.addEventListener('click', (e) => {
-        if (e.target.classList[1] === 'material-symbols-outlined'
+      popup.addEventListener('click', (event) => {
+        if (event.target.classList[1] === 'material-symbols-outlined'
               || e.target.classList.value === 'btn_close') {
           popup.classList.add('d-none');
         }
@@ -43,7 +40,6 @@ form.addEventListener('submit', (e) => {
           formPopup.submit();
         }
       });
-      return;
     });
   });
 
