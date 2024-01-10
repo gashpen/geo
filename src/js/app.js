@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-return */
+/* eslint-disable no-shadow */
 const form = document.querySelector('.footer_form');
 const formPopup = document.querySelector('.form_popup');
 const output = document.querySelector('.chat_view_window');
@@ -16,6 +18,7 @@ form.addEventListener('submit', (e) => {
                 <div class="location">[${latitude}, ${longitude}]</div>
               </div>
             `;
+        return;
       });
     }
   }, () => {
@@ -40,6 +43,7 @@ form.addEventListener('submit', (e) => {
           formPopup.submit();
         }
       });
+      return;
     });
   });
 
