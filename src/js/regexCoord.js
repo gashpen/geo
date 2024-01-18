@@ -2,12 +2,16 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 export default function editCoords(str) {
-  const regexp = /[\[\]]/g;
+  const regexp = /^[-+]?([0-9]*\.[0-9]+|[0-9]+)$/;
   const coords = str.split(',').map((s) => {
     s = s.trim();
-    return s.replace(regexp, '');
+    return s;
   });
 
+  if (!regexp.test(Number(coords[0])) || !regexp.test(Number(coords[1]))) {
+    alert('Введено некоректное значение!');
+    return;
+  }
   if (Number(coords[0]) > 90 || Number(coords[0]) < -90) {
     alert('Неверно введена широта. Широта не должна превышать 90 градусов и быть не меньше -90 градусов');
     return;
